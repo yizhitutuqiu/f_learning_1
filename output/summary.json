@@ -36,16 +36,16 @@
     "optimizer": "fedavg",
     "mu": 0.0,
     "num_rounds": 200,
-    "final_accuracy": 0.6180811808118081,
-    "final_loss": 1.2093259879143916
+    "final_accuracy": 0.6282287822878229,
+    "final_loss": 1.0982346099241194
   },
   {
     "dataset": "synthetic_1_1",
     "optimizer": "fedavg",
     "mu": 0.0,
     "num_rounds": 200,
-    "final_accuracy": 0.6254612546125461,
-    "final_loss": 1.050535780037461
+    "final_accuracy": 0.5488929889298892,
+    "final_loss": 4.082649543276572
   },
   {
     "dataset": "synthetic_1_1",

@@ -3,8 +3,8 @@ synthetic_0.5_0.5,fedavg,0.0,200,0.605263,1.430199
 synthetic_0.5_0.5,fedprox,1.0,200,0.783991,0.577715
 synthetic_0_0,fedavg,0.0,200,0.643255,0.995728
 synthetic_0_0,fedprox,1.0,200,0.800446,0.522293
-synthetic_1_1,fedavg,0.0,200,0.618081,1.209326
-synthetic_1_1,fedavg,0.0,200,0.625461,1.050536
+synthetic_1_1,fedavg,0.0,200,0.628229,1.098235
+synthetic_1_1,fedavg,0.0,200,0.548893,4.082650
 synthetic_1_1,fedavg,0.0,200,0.603321,1.269387
 synthetic_1_1,fedprox,1.0,200,0.671587,0.678894
 synthetic_1_1,fedprox,1.0,200,0.673432,0.706038
