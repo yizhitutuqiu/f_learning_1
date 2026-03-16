@@ -3,7 +3,11 @@ synthetic_0.5_0.5,fedavg,0.0,200,0.607456,1.410514
 synthetic_0.5_0.5,fedprox,1.0,200,0.783991,0.576344
 synthetic_0_0,fedavg,0.0,200,0.637681,0.996999
 synthetic_0_0,fedprox,1.0,200,0.799331,0.524405
+synthetic_1_1,fedavg,0.0,200,0.612546,1.228387
+synthetic_1_1,fedavg,0.0,200,0.608856,1.101928
 synthetic_1_1,fedavg,0.0,200,0.606089,1.268422
+synthetic_1_1,fedprox,1.0,200,0.632841,0.760861
+synthetic_1_1,fedprox,1.0,200,0.616236,0.794761
 synthetic_1_1,fedprox,1.0,200,0.715867,0.616896
 synthetic_iid,fedavg,0.0,200,0.828571,0.590700
 synthetic_iid,fedprox,1.0,200,0.708075,0.851945

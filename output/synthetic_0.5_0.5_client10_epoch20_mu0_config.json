@@ -12,5 +12,6 @@
   "data_root": "/data/litengmo/ml-test-1/Federated_learning_1/f_learning/../FedProx/data",
   "seed": 0,
   "output_suffix": "",
+  "drop_percent": 0.0,
   "dataset_resolved": "synthetic_0.5_0.5"
 }
