@@ -52,6 +52,12 @@ bash run_all.sh
 
 结果与日志分别写入 `output/`、`logs/`。
 
+**多卡并行加速（不改变任何实验结果）**：若机器有多张 GPU，可用 `run_all_parallel.sh` 并行跑多组实验（每组占 1 卡，种子与逻辑与 `run_all.sh` 一致）：
+```bash
+bash run_all_parallel.sh          # 默认 8 卡并行，先 8 组再 4 组
+N_GPUS=4 bash run_all_parallel.sh # 4 卡时自动分 3 批
+```
+
 ### 仅跑基础 8 组 + 基础图（不跑 Figure 1 实验）
 
 若只需 4 数据集 × FedAvg/FedProx 及对应的 accuracy/loss 图（不画 Figure 1）：
@@ -172,6 +178,7 @@ f_learning/
 ├── client.py                # FedProx 客户端（含近端项）
 ├── run_synthetic.py         # 单次实验入口
 ├── run_all.sh               # 一键：12 组实验 + 汇总 + 全部图（含 Figure 1/2）
+├── run_all_parallel.sh      # 同上，多卡并行（每实验 1 卡，结果一致）
 ├── run_all_synthetic.sh     # 仅 8 组基础实验 + 汇总 + 基础图
 ├── run_multi_seed.py        # 多 seed 运行 + mean±std 图
 ├── run_figure1_stragglers.sh # 仅 Figure 1 实验：0%/50%/90% stragglers（6 组）

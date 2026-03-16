@@ -20,6 +20,7 @@ from client import client_fn
 from dataset import (
     FEDPROX_DATA_ROOT,
     get_global_test_loader,
+    get_global_train_loader,
     load_fedprox_synthetic,
 )
 from model import MCLR, get_parameters, set_parameters
@@ -107,6 +108,7 @@ def main():
     num_clients = len(clients)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     global_test_loader = get_global_test_loader(test_data, clients, batch_size=256)
+    global_train_loader = get_global_train_loader(train_data, clients, batch_size=256)
 
     # Client factory: Flower passes client index (int); map to FedProx client id (e.g. f_00000)
     def _client_fn(cid):
@@ -146,6 +148,21 @@ def main():
         history.append({"round": server_round, "accuracy": accuracy, "loss": loss_avg})
         return loss_avg, {"accuracy": accuracy, "loss": loss_avg}
 
+    def central_train_loss(ndarrays: list):
+        """Training loss as in paper: global model loss on full training set (weighted over clients)."""
+        model = MCLR().to(device)
+        set_parameters(model, ndarrays)
+        model.eval()
+        criterion = torch.nn.CrossEntropyLoss()
+        loss_sum, total = 0.0, 0
+        with torch.no_grad():
+            for x, y in global_train_loader:
+                x, y = x.to(device), y.to(device)
+                logits = model(x)
+                loss_sum += criterion(logits, y).item() * x.size(0)
+                total += x.size(0)
+        return loss_sum / total if total else 0.0
+
     def fit_config_fn(rnd: int):
         cfg = {"learning_rate": args.learning_rate}
         if args.optimizer == "fedprox":
@@ -162,7 +179,7 @@ def main():
     np.random.seed(2 + args.seed)
 
     central_evaluate(0, current_parameters)
-    history[0]["train_loss"] = None
+    history[0]["train_loss"] = central_train_loss(current_parameters)
     history[0]["dissimilarity"] = float("nan")
     log(f"  round 0  accuracy: {history[0]['accuracy']:.4f}  loss: {history[0]['loss']:.4f}")
     pbar = tqdm(range(1, args.num_rounds + 1), desc="rounds", unit="rnd", ncols=100)
@@ -183,11 +200,10 @@ def main():
         # Dissimilarity uses global params at round start (before aggregation)
         global_before = current_parameters
         current_parameters = weighted_avg_parameters(results)
-        total_n = sum(r[1] for r in results)
-        train_loss_agg = sum(r[2].get("loss", 0) * r[1] for r in results) / total_n if total_n else 0.0
         dissim = dissimilarity(results, global_before)
         central_evaluate(rnd, current_parameters)
-        history[-1]["train_loss"] = train_loss_agg
+        # Paper-style training loss: global model on full training set (smooth curve)
+        history[-1]["train_loss"] = central_train_loss(current_parameters)
         history[-1]["dissimilarity"] = dissim
         acc, loss_val = history[-1]["accuracy"], history[-1]["loss"]
         pbar.set_postfix(acc=f"{acc:.4f}", loss=f"{loss_val:.4f}")

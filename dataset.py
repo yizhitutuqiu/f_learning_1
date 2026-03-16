@@ -96,3 +96,19 @@ def get_global_test_loader(
     y = torch.tensor(np.concatenate(ys, axis=0), dtype=torch.int64)
     ds = TensorDataset(x, y)
     return DataLoader(ds, batch_size=batch_size, shuffle=False)
+
+
+def get_global_train_loader(
+    train_data: dict,
+    clients: List[str],
+    batch_size: int = 256,
+) -> DataLoader:
+    """Single DataLoader over all clients' train data for central training loss (paper-style)."""
+    xs, ys = [], []
+    for c in clients:
+        xs.append(train_data[c]["x"])
+        ys.append(train_data[c]["y"])
+    x = torch.tensor(np.concatenate(xs, axis=0), dtype=torch.float32)
+    y = torch.tensor(np.concatenate(ys, axis=0), dtype=torch.int64)
+    ds = TensorDataset(x, y)
+    return DataLoader(ds, batch_size=batch_size, shuffle=False)
