@@ -192,6 +192,9 @@ def main():
         active_set = set(rng.choice(selected, size=min(n_active, len(selected)), replace=False).tolist())
         results = []
         for idx in selected:
+            # FedAvg: only train & aggregate active clients (drop stragglers); FedProx: accept all (variable local_epochs)
+            if args.optimizer == "fedavg" and args.drop_percent > 0 and idx not in active_set:
+                continue  # FedAvg drops stragglers (paper: "simply drop the slow devices")
             local_epochs = args.num_epochs if idx in active_set else int(rng.integers(1, max(2, args.num_epochs)))
             config_round = {**config, "local_epochs": local_epochs}
             client = _client_fn(idx)
