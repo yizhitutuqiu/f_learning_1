@@ -72,7 +72,9 @@ class FedProxClient(fl.client.NumPyClient):
 
         num_samples = 0
         total_loss = 0.0
-        for _ in range(self.num_epochs):
+        local_epochs = int(config.get("local_epochs", self.num_epochs))
+        local_epochs = max(1, min(local_epochs, self.num_epochs))
+        for _ in range(local_epochs):
             for x, y in self.train_loader:
                 x, y = x.to(self.device), y.to(self.device)
                 optimizer.zero_grad()

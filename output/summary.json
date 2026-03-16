@@ -1,0 +1,66 @@
+[
+  {
+    "dataset": "synthetic_0.5_0.5",
+    "optimizer": "fedavg",
+    "mu": 0.0,
+    "num_rounds": 200,
+    "final_accuracy": 0.6074561403508771,
+    "final_loss": 1.4105140660938464
+  },
+  {
+    "dataset": "synthetic_0.5_0.5",
+    "optimizer": "fedprox",
+    "mu": 1.0,
+    "num_rounds": 200,
+    "final_accuracy": 0.7839912280701754,
+    "final_loss": 0.5763443603850248
+  },
+  {
+    "dataset": "synthetic_0_0",
+    "optimizer": "fedavg",
+    "mu": 0.0,
+    "num_rounds": 200,
+    "final_accuracy": 0.6376811594202898,
+    "final_loss": 0.9969987455950666
+  },
+  {
+    "dataset": "synthetic_0_0",
+    "optimizer": "fedprox",
+    "mu": 1.0,
+    "num_rounds": 200,
+    "final_accuracy": 0.7993311036789298,
+    "final_loss": 0.5244054646130523
+  },
+  {
+    "dataset": "synthetic_1_1",
+    "optimizer": "fedavg",
+    "mu": 0.0,
+    "num_rounds": 200,
+    "final_accuracy": 0.6060885608856088,
+    "final_loss": 1.2684216090234004
+  },
+  {
+    "dataset": "synthetic_1_1",
+    "optimizer": "fedprox",
+    "mu": 1.0,
+    "num_rounds": 200,
+    "final_accuracy": 0.7158671586715867,
+    "final_loss": 0.6168962426731067
+  },
+  {
+    "dataset": "synthetic_iid",
+    "optimizer": "fedavg",
+    "mu": 0.0,
+    "num_rounds": 200,
+    "final_accuracy": 0.8285714285714286,
+    "final_loss": 0.590699575184295
+  },
+  {
+    "dataset": "synthetic_iid",
+    "optimizer": "fedprox",
+    "mu": 1.0,
+    "num_rounds": 200,
+    "final_accuracy": 0.7080745341614907,
+    "final_loss": 0.8519447761292783
+  }
+]
