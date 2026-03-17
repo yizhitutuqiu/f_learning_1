@@ -13,7 +13,7 @@ pip install -r requirements.txt
 
 依赖：`flwr`、`torch`、`numpy`、`matplotlib`、`tqdm`（见 `requirements.txt`）。
 
-**数据**：从同目录上级的 `FedProx/data/` 加载（需含 `synthetic_iid`、`synthetic_0_0`、`synthetic_0.5_0.5`、`synthetic_1_1` 的 train/test JSON）。可用官方仓库生成后拷入，或 `--data_root` 指定路径。
+**数据与任务**：Synthetic 数据集为 **60 维特征 → 10 类分类**（线性模型 MCLR），数据由 FedProx 官方脚本合成，用于控制数据/系统异质性。从同目录上级的 `FedProx/data/` 加载（需含 `synthetic_iid`、`synthetic_0_0`、`synthetic_0.5_0.5`、`synthetic_1_1` 的 train/test JSON）。可用官方仓库生成后拷入，或 `--data_root` 指定路径。
 
 ---
 
